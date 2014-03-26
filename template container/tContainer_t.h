@@ -31,11 +31,11 @@ public:
 	//operator = 
 	tContainer_t& operator = (const tContainer_t& rhs);
 
-	//operator [] 
-	tContainer_t& operator[] (const int index);
+	//operator []	,	retrieve functionality
+	T* operator[] (const int& index);
 
 	//operator +=
-	tContainer_t operator+=(tContainer_t& rhs);
+	tContainer_t& operator+=(tContainer_t& rhs);
 
 
 	inline int	numOfElements()			const;
@@ -49,9 +49,6 @@ public:
 	void		removeAll();
 
 };
-
-
-
 
 
 #endif
