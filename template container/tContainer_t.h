@@ -14,6 +14,11 @@ class tContainer_t{
 private:
 	CONT container;
 	std::vector<int> vec;			//for debugging 
+	std::list<int>	 lst;			//for debugging
+
+	//container iterators
+	typedef typename CONT::const_iterator const_iter_t;
+	typedef typename CONT::iterator iter_t;
 
 public:
 
@@ -33,23 +38,18 @@ public:
 	tContainer_t operator+=(tContainer_t& rhs);
 
 
-	int		numOfElements()			const;
-	bool	isempty()				const;
-	T*		getFirst()				const;
-	T*		getLast()				const;
-	T*		find(const T& value)	const;
-	void	print()					const;			//for debugging
-	void	insert(T const * lmnt);
-	void	remove(const T& value);
-	void	removeAll();
+	inline int	numOfElements()			const;
+	bool		isempty()				const;
+	T*			getFirst()				const;
+	T*			getLast()				const;
+	T*			find(const T& value)	const;
+	void		print()					const;			//for debugging
+	inline void	insert(T * const &   lmnt);
+	void		remove(const T& value);
+	void		removeAll();
 
 };
 
-
-template<class T,class CONT>
-void tContainer_t<T, CONT >  ::print()const{
-	cout << "this is a list container" << endl;
-}
 
 
 
