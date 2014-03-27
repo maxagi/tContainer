@@ -13,13 +13,6 @@ void tContainer_t<T, CONT >  ::print()const{
 	cout << endl;
 }
 
-
-
-template<class T, class CONT>
-inline void tContainer_t<T, CONT >  ::insert(T * const &   lmnt){
-	container.push_back(lmnt);
-}
-
 template<class T, class CONT>
 T* tContainer_t<T, CONT>::operator[](const int& index){
 
@@ -33,7 +26,6 @@ T* tContainer_t<T, CONT>::operator[](const int& index){
 }
 
 
-
 template<class T, class CONT>
 void tContainer_t<T, CONT>::removeAll(){
 	int size = numOfElements();
@@ -43,7 +35,19 @@ void tContainer_t<T, CONT>::removeAll(){
 
 
 
+template<class Type>
+class Pred{
+private:
+	Type value;
+public:
+	Pred(Type _value) :value(_value){}
+	bool operator()(Type* lmnt){
+		return *lmnt == value;
+	}
+};
+
+
 template<class T, class CONT>
-inline int tContainer_t<T, CONT>::numOfElements()const {
-	return container.size();
+typename CONT::const_iterator  tContainer_t<T, CONT >  ::get_const_iter(const T& value)const {
+	return find_if(container.begin(), --container.end(), Pred<T>(value));
 }

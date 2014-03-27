@@ -4,7 +4,7 @@
 #include <vector>
 #include <list>
 #include <iostream>
-
+#include <algorithm>
 using namespace std;
 
 
@@ -16,11 +16,14 @@ private:
 	std::vector<int> vec;			//for debugging 
 	std::list<int>	 lst;			//for debugging
 
-	//container iterators
+	//container iterator types
 	typedef typename CONT::const_iterator const_iter_t;
 	typedef typename CONT::iterator iter_t;
 
+	const_iter_t get_const_iter(const T& value)const;
+
 public:
+
 
 	//default constructor			
 	tContainer_t() {}
@@ -37,18 +40,16 @@ public:
 	//operator +=
 	tContainer_t& operator+=(tContainer_t& rhs);
 
-
-	inline int	numOfElements()			const;
-	bool		isempty()				const;
-	T*			getFirst()				const;
-	T*			getLast()				const;
-	T*			find(const T& value)	const;
-	void		print()					const;			//for debugging
-	inline void	insert(T * const &   lmnt);
-	void		remove(const T& value);
+	void		print()					const;	//for debugging
+	inline int	numOfElements()			const{ return container.size(); }
+	inline bool	isempty()				const{ return numOfElements() == 0 }
+	inline T*	getFirst()				const{ return container.front(); }
+	inline T*	getLast()				const{ return container.back(); }
+	inline T*	find(const T& value)	const{ return *get_const_iter(value); }
+	void		remove(const T& value)		 { container.erase(get_const_iter(value)); }
+	inline void	insert(T * const &   lmnt)	 { container.push_back(lmnt); }
 	void		removeAll();
 
 };
-
 
 #endif
