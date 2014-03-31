@@ -4,7 +4,6 @@
 #include <list>
 #include <deque>
 
-#define max 1
 using namespace std;
 
 //Type of container & content
@@ -12,62 +11,24 @@ using namespace std;
 typedef int T;
 typedef deque<T *> CONT;
 
-//Members
-int continerNumber, index;
-T* result;
+int continerNumber;
 tContainer_t <T, CONT> container1, container2;
 list<T *> values1, values2;
 
 
 //Methods decelerations
-void GetContainerNumber();
+void getContainerNum();
 tContainer_t<T, CONT>& GetContainer();
 list<T *> &GetValuesList(int i);
 
 
 int main(int argc, int **argv){
-#ifndef husam
-	int i = 13;
-	int* iptr = new int(9);
-	int* iptr2 = new int(11);
-	int* iptr3 = new int(13);
-
-
-
-	tContainer_t<int, vector<int*> > vctContainer;
-	vctContainer.insert(iptr);
-	vctContainer.insert(iptr2);
-	vctContainer.insert(iptr3);
-	vctContainer.print();
-
-	tContainer_t<int, vector<int*> > vctContainer2 = vctContainer;
-
-	vctContainer2.print();
-	tContainer_t<int, vector<int*> > vctContainer3;
-
-	vctContainer3.insert(iptr2);
-	vctContainer3 = vctContainer;
-	vctContainer3.print();
-
-	vctContainer3 += vctContainer2;
-	vctContainer3.print();
-
-	vctContainer2.insert(iptr2);
-	vctContainer2.print();
-
-
-	int x;
-	cin >> x;
-
-#endif
-
-#ifdef husam
-
 	char answer;
 	T *v;
+	T* result;
 	T value;
 	bool cont = true;
-	int i;
+	int i, index;
 
 	while (cont)
 	{
@@ -104,7 +65,7 @@ int main(int argc, int **argv){
 			break;
 			//insert a new element at end of container
 		case 3:
-			GetContainerNumber();
+			getContainerNum();
 			cout << "enter value: " << endl;
 			v = new T;
 			cin >> *v;
@@ -115,17 +76,17 @@ int main(int argc, int **argv){
 			break;
 			//return first element in container
 		case 4:
-			GetContainerNumber();
+			getContainerNum();
 			cout << "first element in container : " << *GetContainer().getFirst() << endl;
 			break;
 			//return last element in container
 		case 5:
-			GetContainerNumber();
+			getContainerNum();
 			cout << "last element in container : " << *GetContainer().getLast() << endl;
 			break;
 			//find specific element by value
 		case 6:
-			GetContainerNumber();
+			getContainerNum();
 			cout << "Enter value to find: " << endl;
 			cin >> value;
 
@@ -139,7 +100,7 @@ int main(int argc, int **argv){
 			break;
 			//remove specific element
 		case 7:
-			GetContainerNumber();
+			getContainerNum();
 			cout << "Enter value to remove: " << endl;
 			cin >> value;
 
@@ -153,7 +114,7 @@ int main(int argc, int **argv){
 
 			//remove all
 		case 8:
-			GetContainerNumber();
+			getContainerNum();
 			GetContainer().removeAll();
 			//free memory of the values vector
 			for (list<T *>::iterator it = GetValuesList(continerNumber).begin(); it != GetValuesList(continerNumber).end(); it++){
@@ -164,7 +125,7 @@ int main(int argc, int **argv){
 			break;
 			//operator[]
 		case 9:
-			GetContainerNumber();
+			getContainerNum();
 			cout << "Enter index: " << endl;
 			cin >> index;
 			cout << "Enter value: " << endl;
@@ -210,15 +171,17 @@ int main(int argc, int **argv){
 			}
 			exit(1);
 			break;
+		default:
+			cout << "Wrong choice" << endl;
+			break;
 		}
 	}
-#endif // !1
 	return 1;
 }
 
 //Method Implementations
 
-void GetContainerNumber(){
+void getContainerNum(){
 	cout << "choose container 1 or 2: " << endl;
 	cin >> continerNumber;
 }
