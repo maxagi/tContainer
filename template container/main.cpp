@@ -32,6 +32,8 @@ int main(int argc, int **argv){
 
 	while (cont)
 	{
+		container1.print();
+		container2.print();
 		cout << "*** Enter your choise: ****" << endl
 			<< "1- is Empty?" << endl
 			<< "2 - return number of elements in container" << endl
@@ -43,7 +45,8 @@ int main(int argc, int **argv){
 			<< " 8 - remove all elements" << endl
 			<< "9 - operator[]" << endl
 			<< "10 - merger of 2 containers" << endl
-			<< "11 - exit" << endl;
+			<< "11 - operator=" << endl
+			<< "12 - exit" << endl;
 
 		cin >> i;
 
@@ -150,7 +153,11 @@ int main(int argc, int **argv){
 			container1 += container2;
 			cout << "container merged" << endl;
 			break;
+			//operator =
 		case 11:
+			container1 = container2;
+			break;
+		case 12:
 			//free the memory of the value vectors
 			for (list<T *>::iterator it = GetValuesList(1).begin(); it != GetValuesList(1).end(); it++){
 				v = *it;
