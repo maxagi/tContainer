@@ -1,6 +1,14 @@
 #include "tContainer_t.h"
 
+//---------------------------------------------------------copy_container
+template<class T, class CONT>
+ void tContainer_t < T, CONT > ::copy_container(CONT &dst, const CONT& src){
+	for (const_iter_t it = src.cbegin(); it != src.cend(); ++it){
+		dst.push_back(*it);
+	}
+}
 
+ //---------------------------------------------------------------print
 template<class T, class CONT>
 void tContainer_t<T, CONT >  ::print()const{
 	T* ptr;
@@ -13,9 +21,7 @@ void tContainer_t<T, CONT >  ::print()const{
 	cout << endl;
 }
 
-
-
-
+//----------------------------------------------------------operator []
 template<class T, class CONT>
 T* tContainer_t<T, CONT>::operator[](const int& index){
 
@@ -28,20 +34,22 @@ T* tContainer_t<T, CONT>::operator[](const int& index){
 	return *it;
 }
 
-
-
-
+//-----------------------------------------------------------operator+=
 template<class T, class CONT>
 void tContainer_t<T, CONT>::operator+=(tContainer_t<T, CONT>& rhs){
-
 	container.insert(container.end(), rhs.container.begin(), rhs.container.end());
-	rhs.container.clear();
-
+	rhs.removeAll();
 }
 
+//------------------------------------------------------------operator=
+template<class T, class CONT >
+tContainer_t<T, CONT>&  tContainer_t<T, CONT>:: operator = (const tContainer_t& rhs){
+	this->removeAll();
+	copy_container(this->container, rhs.container);
+	return *this;
+}
 
-
-
+//------------------------------------------------------------removeAll
 template<class T, class CONT>
 void tContainer_t<T, CONT>::removeAll(){
 	int size = numOfElements();
@@ -49,9 +57,7 @@ void tContainer_t<T, CONT>::removeAll(){
 		container.pop_back();
 }
 
-
-
-
+//-------------------------------------------------------get_const_iter
 template<class Type>
 class Pred{
 private:
@@ -63,24 +69,19 @@ public:
 	}
 };
 
-
 template<class T, class CONT>
 typename CONT::const_iterator  tContainer_t<T, CONT >  ::get_const_iter(const T& value)const {
 	return find_if(container.begin(), container.end(), Pred<T>(value));
 }
 
-
-
-
+//-----------------------------------------------------------------find
 template<class T, class CONT>
 T*	tContainer_t<T, CONT>::find(const T& value)const{
 	const_iter_t position = get_const_iter(value);
 	return position == container.cend() ? 0 : *position;
 }
 
-
-
-
+//---------------------------------------------------------------remove
 template<class T, class CONT>
 void  tContainer_t<T, CONT>::remove(const T& value){
 	const_iter_t position = get_const_iter(value);

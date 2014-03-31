@@ -4,7 +4,7 @@
 #include <list>
 #include <deque>
 
-#define husam 1
+#define max 1
 using namespace std;
 
 //Type of container & content
@@ -39,37 +39,22 @@ int main(int argc, int **argv){
 	vctContainer.insert(iptr2);
 	vctContainer.insert(iptr3);
 	vctContainer.print();
-	cout << vctContainer.find(i) << endl;
-	vctContainer.remove(101);
-	vctContainer.print();
 
+	tContainer_t<int, vector<int*> > vctContainer2 = vctContainer;
 
+	vctContainer2.print();
+	tContainer_t<int, vector<int*> > vctContainer3;
 
-	cout << endl;
+	vctContainer3.insert(iptr2);
+	vctContainer3 = vctContainer;
+	vctContainer3.print();
 
-	tContainer_t<int, list<int*> > lstContainer;
-	lstContainer.insert(iptr);
-	lstContainer.insert(iptr2);
-	lstContainer.insert(iptr3);
+	vctContainer3 += vctContainer2;
+	vctContainer3.print();
 
-	lstContainer.print();
-	cout << lstContainer.find(i) << endl;
-	lstContainer.remove(9);
-	lstContainer.print();
-	
-	cout << endl;
+	vctContainer2.insert(iptr2);
+	vctContainer2.print();
 
-	tContainer_t<int, list<int*> > lstContainer2;
-	lstContainer2.insert(iptr);
-	lstContainer2.insert(iptr2);
-	lstContainer2.insert(iptr3);
-	lstContainer2 += lstContainer;
-	lstContainer.print();
-	lstContainer2.print();
-
-	lstContainer2.remove(13);
-	lstContainer2.remove(9);
-	lstContainer2.print();
 
 	int x;
 	cin >> x;

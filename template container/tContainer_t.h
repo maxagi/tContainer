@@ -18,16 +18,19 @@ private:
 	typedef typename CONT::const_iterator const_iter_t;
 	typedef typename CONT::iterator iter_t;
 
+	//returns iterator to the first element with the specified value
 	const_iter_t get_const_iter(const T& value)const;
 
+	//copies contents of src to dst * assumes dst is empty *
+	static void copy_container(CONT &dst, const CONT& src);
+
+
 public:
-
-
 	//default constructor
 	tContainer_t() {}
 
 	//copy constructor
-	tContainer_t(const tContainer_t & other);
+	tContainer_t(const tContainer_t & other)	 { copy_container(this->container, other.container); }
 
 	//operator =
 	tContainer_t& operator = (const tContainer_t& rhs);
@@ -37,6 +40,8 @@ public:
 
 	//operator +=
 	void operator+=(tContainer_t<T, CONT>& rhs);
+
+
 
 	void			print()					const; //for debugging
 	inline int		numOfElements()			const{ return container.size(); }
@@ -49,5 +54,4 @@ public:
 	void			removeAll();
 
 };
-
 #endif
