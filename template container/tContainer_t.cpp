@@ -1,13 +1,5 @@
 #include "tContainer_t.h"
 
-//---------------------------------------------------------copy_container
-template<class T, class CONT>
- void tContainer_t < T, CONT > ::copy_container(CONT &dst, const CONT& src){
-	for (const_iter_t it = src.cbegin(); it != src.cend(); ++it){
-		dst.push_back(*it);
-	}
-}
-
  //---------------------------------------------------------------print
 template<class T, class CONT>
 void tContainer_t<T, CONT >  ::print()const{
@@ -19,6 +11,13 @@ void tContainer_t<T, CONT >  ::print()const{
 		cout << "[*" << ptr << "= " << *ptr << "]";
 	}
 	cout << endl;
+}
+
+//------------------------------------------------------------copy CTOR
+template<class T, class CONT >
+tContainer_t<T, CONT> ::tContainer_t(const tContainer_t & other)	 {
+	this->container.insert(this->container.begin(),
+		other.container.cbegin(), other.container.cend());
 }
 
 //----------------------------------------------------------operator []
@@ -45,7 +44,7 @@ void tContainer_t<T, CONT>::operator+=(tContainer_t<T, CONT>& rhs){
 template<class T, class CONT >
 tContainer_t<T, CONT>&  tContainer_t<T, CONT>:: operator = (const tContainer_t& rhs){
 	this->removeAll();
-	copy_container(this->container, rhs.container);
+	this->container.insert(this->container.begin(), rhs.container.cbegin(), rhs.container.cend());
 	return *this;
 }
 

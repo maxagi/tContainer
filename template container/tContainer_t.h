@@ -21,16 +21,12 @@ private:
 	//returns iterator to the first element with the specified value
 	const_iter_t get_const_iter(const T& value)const;
 
-	//copies contents of src to dst * assumes dst is empty *
-	static void copy_container(CONT &dst, const CONT& src);
-
-
 public:
 	//default constructor
 	tContainer_t() {}
 
 	//copy constructor
-	tContainer_t(const tContainer_t & other)	 { copy_container(this->container, other.container); }
+	tContainer_t(const tContainer_t & other);
 
 	//operator =
 	tContainer_t& operator = (const tContainer_t& rhs);

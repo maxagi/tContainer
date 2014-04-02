@@ -27,13 +27,11 @@ int main(int argc, int **argv){
 	T *v;
 	T* result;
 	T value;
-	bool cont = true;
+	bool cont = true, found = true;
 	int i, index;
 
 	while (cont)
 	{
-		container1.print();
-		container2.print();
 		cout << "*** Enter your choise: ****" << endl
 			<< "1- is Empty?" << endl
 			<< "2 - return number of elements in container" << endl
@@ -42,10 +40,10 @@ int main(int argc, int **argv){
 			<< "5 - return last element in container" << endl
 			<< "6 - find specific element by value" << endl
 			<< "7 - remove specific element" << endl
-			<< " 8 - remove all elements" << endl
+			<< "8 - remove all elements" << endl
 			<< "9 - operator[]" << endl
 			<< "10 - merger of 2 containers" << endl
-			<< "11 - operator=" << endl
+			<< "11 - operator =" << endl
 			<< "12 - exit" << endl;
 
 		cin >> i;
@@ -80,12 +78,18 @@ int main(int argc, int **argv){
 			//return first element in container
 		case 4:
 			getContainerNum();
-			cout << "first element in container : " << *GetContainer().getFirst() << endl;
+			if (GetContainer().numOfElements() <= 0)
+				cout << "error: container is empty!" << endl;
+			else
+				cout << "first element in container : " << *GetContainer().getFirst() << endl;
 			break;
 			//return last element in container
 		case 5:
 			getContainerNum();
-			cout << "last element in container : " << *GetContainer().getLast() << endl;
+			if (GetContainer().numOfElements() == 0)
+				cout << "error: container is empty!" << endl;
+			else
+				cout << "last element in container : " << *GetContainer().getLast() << endl;
 			break;
 			//find specific element by value
 		case 6:
@@ -93,8 +97,8 @@ int main(int argc, int **argv){
 			cout << "Enter value to find: " << endl;
 			cin >> value;
 
-			result = GetContainer().find(value);
-			if (*result == value){
+			found = GetContainer().find(value);
+			if (found){
 				cout << "Element found" << endl;
 			}
 			else{
@@ -104,15 +108,17 @@ int main(int argc, int **argv){
 			//remove specific element
 		case 7:
 			getContainerNum();
+
 			cout << "Enter value to remove: " << endl;
 			cin >> value;
-
-			GetContainer().remove(value);
-			cout << "Element removed" << endl;
-
-			//Remove address in values vector in order to remove it
-			GetValuesList(continerNumber).remove(result);
-			delete result; //free memory
+			found = GetContainer().find(value);
+			if (!found){
+				cout << "error: Element not found" << endl;
+			}
+			else{
+				GetContainer().remove(value);
+				cout << "Element removed" << endl;
+			}
 			break;
 
 			//remove all
