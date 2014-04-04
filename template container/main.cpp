@@ -1,4 +1,4 @@
-#include "tContainer_t.cpp"
+#include "tContainer_t.h"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -32,6 +32,8 @@ int main(int argc, int **argv){
 
 	while (cont)
 	{
+		container1.print();
+		container2.print();
 		cout << "*** Enter your choise: ****" << endl
 			<< "1- is Empty?" << endl
 			<< "2 - return number of elements in container" << endl
